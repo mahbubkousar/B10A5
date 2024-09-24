@@ -21,7 +21,7 @@
 		/>
 	</head>
 	<body class="bg-blue-50">
-		<!-- Navbar Section -->
+		<!-- Navbar -->
 		<header
 			id="navbar"
 			class="sticky top-0 bg-white p-4 shadow-lg z-50 transition-all"
@@ -33,14 +33,14 @@
 					<h1 class="text-xl font-bold">Donate Bangladesh</h1>
 				</div>
 				<div class="flex items-center">
-					<img src="./images/coin.png" alt="" />
+					<i class="fas fa-dollar-sign"></i>
 					<span id="balance" class="ml-2 text-lg font-semibold">5000 BDT</span>
 				</div>
 			</div>
 		</header>
 
-		<!-- Main Section -->
-		<main class="container mx-auto mt-6 pb-10 bg-blue-50">
+		<!-- Main Content -->
+		<main class="container mx-auto mt-6">
 			<!-- Navigation Buttons -->
 			<div class="flex justify-center space-x-4 mb-4">
 				<button id="donation-btn" class="btn btn-primary active">
@@ -48,22 +48,18 @@
 				</button>
 				<button id="history-btn" class="btn btn-outline">History</button>
 			</div>
+
 			<!-- Donation Section -->
-			<section id="donation-section" class="space-y-4 px-10">
-				<div class="bg-white shadow-md rounded-lg p-4 grid grid-cols-2 gap-8">
+			<section id="donation-section" class="space-y-4 pb-20 mx-10">
+				<div class="bg-white shadow-md rounded-lg p-4 grid grid-cols-2 gap-4">
 					<img
-						src="./images/feni.png"
+						src="./images/noakhali.png"
 						alt="Image 1"
 						class="w-full h-72 rounded-md mr-4"
 					/>
 					<div>
-						<div class="flex flex-row gap-4">
-							<img src="./images/coin.png" alt="" />
-							<h2 id="amount1" class="text-xl font-bold">500 BDT</h2>
-						</div>
-						<p class="font-bold text-xl py-5">
-							Donate for Flood at Noakhali, Bangladesh
-						</p>
+						<h2 id="amount1" class="text-xl font-bold">500 BDT</h2>
+						<p class="font-medium">Donate for Flood at Noakhali, Bangladesh</p>
 						<p class="text-sm">
 							The recent floods in Noakhali have caused significant damage to
 							homes infrastructure. Your donation will help provide essential
@@ -87,18 +83,15 @@
 					</div>
 				</div>
 
-				<div class="bg-white shadow-md rounded-lg p-4 grid grid-cols-2 gap-8">
+				<div class="bg-white shadow-md rounded-lg p-4 grid grid-cols-2 gap-4">
 					<img
-						src="./images/noakhali.png"
-						alt="Image 1"
+						src="./images/feni.png"
+						alt="Image 2"
 						class="w-full h-72 rounded-md mr-4"
 					/>
 					<div>
-						<div class="flex flex-row gap-4">
-							<img src="./images/coin.png" alt="" />
-							<h2 id="amount1" class="text-xl font-bold">600 BDT</h2>
-						</div>
-						<p class="font-bold text-xl py-5">
+						<h2 id="amount2" class="text-xl font-bold">1000 BDT</h2>
+						<p class="font-medium">
 							Donate for Flood Relief in Feni,Bangladesh
 						</p>
 						<p class="text-sm">
@@ -119,27 +112,22 @@
 						/>
 						<button
 							class="btn btn-primary w-full"
-							onclick="handleDonation(600, 'Donate for Flood Relief in Feni,Bangladesh', 2)"
+							onclick="handleDonation(1000, 'Donate for Flood Relief in Feni,Bangladesh', 2)"
 						>
 							Donate Now
 						</button>
 					</div>
 				</div>
 
-				<div class="bg-white shadow-md rounded-lg p-4 grid grid-cols-2 gap-8">
+				<div class="bg-white shadow-md rounded-lg p-4 grid grid-cols-2 gap-4">
 					<img
 						src="./images/quota-protest.png"
-						alt="Image 1"
+						alt="Image 3"
 						class="w-full h-72 rounded-md mr-4"
 					/>
 					<div>
-						<div class="flex flex-row gap-4">
-							<img src="./images/coin.png" alt="" />
-							<h2 id="amount1" class="text-xl font-bold">1000 BDT</h2>
-						</div>
-						<p class="font-bold text-xl py-5">
-							Aid for Injured in the Quota Movement
-						</p>
+						<h2 id="amount3" class="text-xl font-bold">2000 BDT</h2>
+						<p class="font-medium">Aid for Injured in the Quota Movement</p>
 						<p class="text-sm">
 							The recent Quota movement has resulted in numerous injuries and
 							significant hardship for many individuals. Your support is crucial
@@ -159,7 +147,7 @@
 						/>
 						<button
 							class="btn btn-primary w-full"
-							onclick="handleDonation(1000, 'Aid for Injured in the Quota Movement', 3)"
+							onclick="handleDonation(2000, 'Aid for Injured in the Quota Movement', 3)"
 						>
 							Donate Now
 						</button>
@@ -168,7 +156,121 @@
 			</section>
 
 			<!-- History Section -->
-			<section id="history-section" class="hidden"></section>
+			<section id="history-section" class="hidden">
+				<div id="history-list">
+					<p></p>
+				</div>
+			</section>
 		</main>
+
+		<!-- Static Modal for Success -->
+		<input type="checkbox" id="success-modal" class="modal-toggle" />
+		<div class="modal">
+			<div class="modal-box flex flex-col gap-2 mx-auto">
+				<h3 class="font-bold text-lg">Congrats!</h3>
+				<p class="py-4">
+					<img src="./images/coin.png" alt=""></i> 
+					<p class="font-bold">You have donated for humankind</p>
+					<p class="text-2xl text-red-600 font-extrabold">successfully</p>
+				</p>
+				<div class="modal-action">
+					<label for="success-modal" class="btn">Close</label>
+				</div>
+			</div>
+		</div>
+
+		<!-- JavaScript Codes -->
+		<script>
+			let balance = 5000;
+			const balanceElement = document.getElementById("balance");
+			const donationSection = document.getElementById("donation-section");
+			const historySection = document.getElementById("history-section");
+			const donationBtn = document.getElementById("donation-btn");
+			const historyBtn = document.getElementById("history-btn");
+			const historyList = document.getElementById("history-list");
+
+			donationBtn.addEventListener("click", () => {
+				toggleSection(donationSection, historySection, donationBtn, historyBtn);
+			});
+
+			historyBtn.addEventListener("click", () => {
+				toggleSection(historySection, donationSection, historyBtn, donationBtn);
+			});
+
+			// Reusable functions
+			function toggleSection(showSection, hideSection, activeBtn, inactiveBtn) {
+				showSection.classList.remove("hidden");
+				hideSection.classList.add("hidden");
+				activeBtn.classList.add("btn-primary", "active");
+				inactiveBtn.classList.remove("btn-primary", "active");
+			}
+
+			// Reusable function to update balance
+			function updateBalance(donationAmount) {
+				balance -= donationAmount;
+				balanceElement.textContent = `${balance} BDT`;
+			}
+
+			// Reusable function to create a history entry
+			function createHistoryEntry(donationAmount, title) {
+				const date = new Date().toLocaleString();
+				const historyItem = document.createElement("div");
+				historyItem.innerHTML = `
+                <div class="card bg-white shadow-md rounded-lg p-4 my-2">
+                    <p class="text-lg">${donationAmount} Taka is Donated for ${title}</p>
+                    <p class="text-sm">Date: ${date}</p>
+                </div>`;
+				historyList.appendChild(historyItem);
+			}
+
+			// Donations
+			function handleDonation(minAmount, title, donationNumber) {
+				const donationInput = document.getElementById(
+					`donation${donationNumber}`
+				);
+				const amountText = document.getElementById(`amount${donationNumber}`);
+				const donationValue = donationInput.value.trim();
+
+				const donationAmount = parseFloat(donationValue);
+
+				if (isNaN(donationAmount) || donationAmount <= 0) {
+					alert("Please enter a valid numeric amount.");
+					return;
+				}
+
+
+				if (donationAmount > balance) {
+					alert("Donation amount exceeds the available balance.");
+					return;
+				}
+
+				updateBalance(donationAmount);
+				const currentAmount = parseFloat(amountText.textContent.split(" ")[0]);
+				const newAmount = currentAmount + donationAmount;
+				amountText.textContent = `${newAmount} BDT`;
+
+				createHistoryEntry(donationAmount, title);
+
+				document.getElementById("success-modal").checked = true;
+			}
+
+			window.addEventListener("scroll", () => {
+				const navbar = document.getElementById("navbar");
+				if (window.scrollY > 0) {
+					navbar.classList.add(
+						"bg-white",
+						"bg-opacity-80",
+						"backdrop-filter",
+						"backdrop-blur-md"
+					);
+				} else {
+					navbar.classList.remove(
+						"bg-opacity-80",
+						"backdrop-filter",
+						"backdrop-blur-md"
+					);
+				}
+			});
+		</script>
 	</body>
 </html>
